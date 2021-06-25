@@ -1,0 +1,101 @@
+html {
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.ui-accordion .ui-accordion-header {
+	display: block;
+	cursor: pointer;
+	position: relative;
+	margin: 0px;
+	padding: 10px;
+    font-size: 80%;
+    
+    border-radius: 0;
+    border: .2px solid lightgrey;
+}
+
+.ui-accordion .ui-accordion-content {
+	padding: 0;
+    overflow: auto;
+    border-radius: 0;
+    border: .2px solid lightgrey;
+	border-top: 0;
+}
+
+.ui-accordion .ui-state-default {
+    background: #fffefe;
+    font-weight: normal;
+    color: #454545;
+}
+
+.ui-accordion .ui-state-active {
+    background: #007bff;
+    font-weight: normal;
+    color: #ffffff;
+}
+
+.page-side-content {
+    background: #f6f6f6;
+    color: #454545;
+    border: 1px solid lightgrey;
+    border-bottom: 0; 
+    font-size: 90%;
+}
+
+.pageSideMinibar-fixed {
+    position: fixed;
+    top: 65px;
+    z-index: 1000;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.thin-scroll-bar {
+    scrollbar-width: thin;
+}
+
+.overflow-y-auto {
+    overflow-y: auto;
+}
+
+.dataTables_wrapper, .dt-bootstrap4 {
+    margin: 0!important;
+    padding: 0!important;
+}
+
+.is-radiusless, .radius-0 {
+    border-radius: 0;
+}
+
+.datepicker {
+    padding: 10px;
+}
+
+table.dataTable {
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+}
+
+.underline-link {
+    color: rgb(54, 54, 250);
+    text-decoration: dashed;
+    cursor: pointer;
+}
+
+.dropzone {
+    border-radius: 10px;
+    border: dashed 2px #007bff;
+}
+
+.sort-highlight {
+    list-style: none;
+    background: #d5e0eb;
+    border: 1px dashed #6da7e0;
+    margin-bottom: 0px;
+}
+
+.bb-dotted {
+    border-bottom: dotted 1px grey;
+}
