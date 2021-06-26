@@ -1,0 +1,9 @@
+{% extends 'sdapp/layouts/admin.html' %}
+
+{% block title %}Profile - Service Desk{% endblock title %}
+
+{% block page_title %}My Profile{% endblock page_title %}
+
+{% block content %}
+    <h1>{{ user.get_full_name }}</h1>
+{% endblock content %}

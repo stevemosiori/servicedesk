@@ -1,0 +1,104 @@
+{% extends 'sdapp/layouts/admin.html' %}
+
+{% block title %}Dashboard - Service Desk{% endblock title %}
+
+{% block page_title %}Dashboard{% endblock page_title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-7">
+            <!-- USERS LIST -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Recent Tickets</h3>
+
+                <div class="card-tools">
+                  <span class="badge badge-danger">8 New tickets</span>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table m-0">
+                    <thead>
+                    <tr>
+                      <th>Ticket ID</th>
+                      <th>Customer</th>
+                      <th>Status</th>
+                      <th>Priority</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td><a href="#">#9842</a></td>
+                      <td>Steve Osoro</td>
+                      <td><span class="badge badge-success">Resolved</span></td>
+                      <td>
+                        High
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">#1848</a></td>
+                      <td>Mark Daniels</td>
+                      <td><span class="badge badge-warning">Pending</span></td>
+                      <td>
+                        Medium
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">#7429</a></td>
+                      <td>Lydia Mungai</td>
+                      <td><span class="badge badge-danger">Cancelled</span></td>
+                      <td>
+                        Low
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">OR7429</a></td>
+                      <td>Samsung Smart TV</td>
+                      <td><span class="badge badge-info">Processing</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">OR1848</a></td>
+                      <td>Samsung Smart TV</td>
+                      <td><span class="badge badge-warning">Pending</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">OR7429</a></td>
+                      <td>iPhone 6 Plus</td>
+                      <td><span class="badge badge-danger">Delivered</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">OR9842</a></td>
+                      <td>Call of Duty IV</td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer text-center">
+                <a href="javascript:">View All Tickets</a>
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <!--/.card -->
+          </div>
+          <!-- /.col -->
+        <div class="col-md-5"></div>
+    </div>
+{% endblock content %}

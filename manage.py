@@ -20,3 +20,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# gunicorn --env DJANGO_SETTINGS_MODULE=servicedesk.settings servicedesk.wsgi --reload # Reloads as code changes
+# gunicorn --env DJANGO_SETTINGS_MODULE=servicedesk.settings servicedesk.wsgi --max-requests 1 # Ensure each request starts a new worker hence all code changes are reflected. Nice on dev env

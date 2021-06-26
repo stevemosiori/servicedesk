@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    # 'django_db_prefix',
     'sdapp.apps.SdappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -82,7 +83,7 @@ DATABASES = {
         'HOST': 'localhost',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'NAME': 'servicedesk'
+        'NAME': 'servicedesk',
     }
 }
 
@@ -132,3 +133,9 @@ STATIC_ROOT = '/home/steve/Code/python/servicedesk/servicedesk/public/static'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/dashboard/'
+
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+LOGIN_URL = '/accounts/login/'
