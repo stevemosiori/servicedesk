@@ -1,0 +1,200 @@
+{% extends 'sdapp/layouts/admin.html' %}
+
+{% block title %}New Ticket - Service Desk{% endblock title %}
+
+{% block page_title %}New ticket{% endblock page_title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+        <form class="pb-5" id="addTicketForm" action="{{ request.scheme }}://{{ request.get_host }}{% url 'tickets.new' %}" method="post">
+            <div id="newTicketWindow" style="min-height: 450px;" class="card card-info card-outline">
+                <div class="card-body p-0 bg-light">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                                <a 
+                                    class="nav-link active" id="customer-info-tab1" data-toggle="pill" 
+                                    href="#customer-tab1" role="tab" aria-controls="customer-tab1" 
+                                    aria-selected="true"><i class="fa fa-info"></i> Basic</a>
+            
+                                <a 
+                                    class="nav-link" id="customer-info-tab3" data-toggle="pill" 
+                                    href="#customer-tab3" role="tab" aria-controls="customer-tab3" 
+                                    aria-selected="false"><i class="fa fa-address-book"></i> Address <small><em>(Optional)</em></small></a>
+            
+                                <a 
+                                    class="nav-link" id="customer-info-tab4" data-toggle="pill" 
+                                    href="#customer-tab4" role="tab" aria-controls="customer-tab4" 
+                                    aria-selected="false"><i class="fa fa-flag"></i> National <small><em>(Optional)</em></small></a>
+            
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="tab-content p-3" id="vert-tabs-tabContent">
+                                <div 
+                                    class="tab-pane text-left fade show active" 
+                                    id="customer-tab1" role="tabpanel" 
+                                    aria-labelledby="customer-info-tab1"
+                                >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="ticketSource">Ticket source<span class="text-danger">*</span></label>
+                                                <select name="ticketSource" id="ticketSource" class="custom-select">
+                                                    <option value="whatsapp">WhatsApp</option>
+                                                    <option value="sms">SMS</option>
+                                                    <option value="phone">Phone call</option>
+                                                    <option value="facebook">Facebook</option>
+                                                    <option value="telegram">Telegram</option>
+                                                    <option value="instagram">Instagram</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="ticketPriority">Ticket Priority<span class="text-danger">*</span></label>
+                                                <select name="ticketPriority" id="ticketPriority" class="custom-select">
+                                                    <option value="low">Low</option>
+                                                    <option value="medium">Medium</option>
+                                                    <option value="high">High</option>
+                                                    <option value="urgent">Urgent</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <h5 class="text-primary"><i class="fa fa-user"></i> Customer details</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="customerFirstName">First Name<span class="text-danger">*</span></label>
+                                                <input value="" type="text" class="form-control" id="customerFirstName" name="customerFirstName" placeholder="First name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="customerLastName">Last Name<span class="text-danger">*</span></label>
+                                                <input value="" type="text" class="form-control" id="customerLastName" name="customerLastName" placeholder="Last name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="customerEmail">Email<span class="text-danger">*</span></label>
+                                                <input value="" type="text" class="form-control" id="customerEmail" name="customerEmail" placeholder="Customer email">
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <h5 class="text-primary"><i class="fa fa-comment"></i> Message</h5>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="ticketType">Ticket Type<span class="text-danger">*</span></label>
+                                                <select name="ticketType" id="ticketType" class="custom-select">
+                                                    <option value="support">Support</option>
+                                                    <option value="technical">Technical</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="ticketSubject">Subject<span class="text-danger">*</span></label>
+                                                <input value="" type="text" class="form-control" id="ticketSubject" name="ticketSubject" placeholder="Subject">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="ticketMessage">Message<span class="text-danger">*</span></label>
+                                                <textarea id="ticketMessage" placeholder="Message..." name="ticketMessage"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="dropzone mt-2" id="ticketAttachments"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-12">
+                            <small><em>Required fields are marked</em></small> <span class="text-danger">*</span>
+                            <button type="submit" class="btn btn-primary float-right">Submit</button>
+                            <button data-href="{% url 'tickets' %}" class="btn btn-outline-danger mr-2 float-right animatedLinkBtn">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+<script>
+    Dropzone.autoDiscover = false
+
+    Dropzone.options.ticketAttachments = {
+        dictDefaultMessage: '<i style="font-size: 25px;" class="fa fa-cloud-upload-alt"></i> Drop attachments here or Click to select files',
+        paramName: "ticketAttachment", 
+        maxFilesize: 30, // MB
+        addRemoveLinks: true,
+        url: "{{ request.scheme }}://{{ request.get_host }}{% url 'tickets.attachment.upload' %}",
+        init: function() {
+            this.on("error", function(e, errorMessage) { 
+                if(errorMessage.messages) {
+                    let errorString = '';
+                    $.each(errors, function(index, value) {
+                         errorString += value;
+                    });
+
+                    $( e.previewElement ).find('[data-dz-errormessage]').text(errorString);
+                }
+            });
+        }
+    };
+
+
+$(function() {
+    $('#ticketMessage').summernote({
+        height: 150
+    })
+
+    $('.dropzone').dropzone();
+
+    $( document ).on('submit', '#addTicketForm', function(e) {
+        if(e.preventDefault) e.preventDefault();
+
+        let addTicketForm = $( this ).ajaxSubmit({
+            method: 'POST',
+            beforeSend: function(xhr, settings) {
+                appLoader('show', '#newTicketWindow')
+            },
+            complete: function(xhr, status) {
+                appLoader('hide', '#newTicketWindow')
+            }
+        });
+
+        let jqXhr = addTicketForm.data('jqxhr');
+        jqXhr.done(function(res) {
+            if(res.message == 'success') {
+                appSnackbar(res.reason);
+                location.href = "{% url 'tickets' %}";
+            } else if(res.message == 'failed') {
+                appSnackbar(res.reason);
+            } else if(res.message == 'error') {
+                let errors = res.reason;
+
+                toastr.error(res.reason);
+            }
+        }).fail(function(d) {
+            console.log(d)
+        });
+    });    
+})
+</script>
+{% endblock js %}

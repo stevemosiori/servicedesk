@@ -1,38 +1,3 @@
-html {
-    font-family: Verdana, Geneva, sans-serif;
-}
-
-.ui-accordion .ui-accordion-header {
-	display: block;
-	cursor: pointer;
-	position: relative;
-	margin: 0px;
-	padding: 10px;
-    font-size: 80%;
-    
-    border-radius: 0;
-    border: .2px solid lightgrey;
-}
-
-.ui-accordion .ui-accordion-content {
-	padding: 0;
-    overflow: auto;
-    border-radius: 0;
-    border: .2px solid lightgrey;
-	border-top: 0;
-}
-
-.ui-accordion .ui-state-default {
-    background: #fffefe;
-    font-weight: normal;
-    color: #454545;
-}
-
-.ui-accordion .ui-state-active {
-    background: #007bff;
-    font-weight: normal;
-    color: #ffffff;
-}
 
 .page-side-content {
     background: #f6f6f6;
@@ -85,7 +50,7 @@ table.dataTable {
 }
 
 .dropzone {
-    border-radius: 10px;
+    border-radius: 6px;
     border: dashed 2px #007bff;
 }
 

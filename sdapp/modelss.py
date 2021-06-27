@@ -255,16 +255,6 @@ class Solutions(models.Model):
         db_table = 'solutions'
 
 
-class SupportGroup(models.Model):
-    name = models.CharField(max_length=191)
-    description = models.TextField()
-    created_at = models.DateTimeField()
-    is_active = models.IntegerField()
-    user_view = models.IntegerField()
-
-    class Meta:
-        db_table = 'support_group'
-
 
 class SupportGroupsTeams(models.Model):
     supportgroup = models.OneToOneField(SupportGroup, on_delete=models.DO_NOTHING, db_column='supportGroup_id', primary_key=True)  # Field name made lowercase.
@@ -301,17 +291,6 @@ class SupportRole(models.Model):
     class Meta:
         db_table = 'support_role'
 
-
-class SupportTeam(models.Model):
-    name = models.CharField(max_length=191)
-    description = models.TextField()
-    created_at = models.DateTimeField()
-    is_active = models.IntegerField()
-
-    class Meta:
-        db_table = 'support_team'
-
-
 class Tag(models.Model):
     name = models.CharField(max_length=255)
 
@@ -342,52 +321,8 @@ class Thread(models.Model):
         db_table = 'thread'
 
 
-class Ticket(models.Model):
-    status = models.ForeignKey('TicketStatus', on_delete=models.DO_NOTHING, blank=True, null=True)
-    priority = models.ForeignKey('TicketPriority', on_delete=models.DO_NOTHING, blank=True, null=True)
-    type = models.ForeignKey('TicketType', on_delete=models.DO_NOTHING, blank=True, null=True)
-    customer = models.ForeignKey('User', related_name='ticket_user', on_delete=models.DO_NOTHING, blank=True, null=True)
-    agent = models.ForeignKey('User', on_delete=models.DO_NOTHING, blank=True, null=True)
-    group = models.ForeignKey(SupportGroup, on_delete=models.DO_NOTHING, blank=True, null=True)
-    source = models.CharField(max_length=191)
-    mailbox_email = models.CharField(max_length=191, blank=True, null=True)
-    subject = models.TextField(blank=True, null=True)
-    reference_ids = models.TextField(blank=True, null=True)
-    is_new = models.IntegerField()
-    is_replied = models.IntegerField()
-    is_reply_enabled = models.IntegerField()
-    is_starred = models.IntegerField()
-    is_trashed = models.IntegerField()
-    is_agent_viewed = models.IntegerField()
-    is_customer_viewed = models.IntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    subgroup = models.ForeignKey(SupportTeam, on_delete=models.DO_NOTHING, db_column='subGroup_id', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        db_table = 'ticket'
 
 
-class TicketAttachments(models.Model):
-    thread = models.ForeignKey(Thread, on_delete=models.DO_NOTHING, blank=True, null=True)
-    name = models.TextField(blank=True, null=True)
-    path = models.TextField(blank=True, null=True)
-    content_type = models.CharField(max_length=255, blank=True, null=True)
-    size = models.IntegerField(blank=True, null=True)
-    content_id = models.CharField(max_length=255, blank=True, null=True)
-    file_system = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        db_table = 'ticket_attachments'
-
-
-class TicketPriority(models.Model):
-    code = models.CharField(unique=True, max_length=191)
-    description = models.TextField(blank=True, null=True)
-    color_code = models.CharField(max_length=191, blank=True, null=True)
-
-    class Meta:
-        db_table = 'ticket_priority'
 
 
 class TicketRating(models.Model):
@@ -399,25 +334,6 @@ class TicketRating(models.Model):
 
     class Meta:
         db_table = 'ticket_rating'
-
-
-class TicketStatus(models.Model):
-    code = models.CharField(unique=True, max_length=191)
-    description = models.TextField(blank=True, null=True)
-    color_code = models.CharField(max_length=191, blank=True, null=True)
-    sort_order = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        db_table = 'ticket_status'
-
-
-class TicketType(models.Model):
-    code = models.CharField(unique=True, max_length=191)
-    description = models.TextField(blank=True, null=True)
-    is_active = models.IntegerField()
-
-    class Meta:
-        db_table = 'ticket_type'
 
 
 class TicketsCollaborators(models.Model):
@@ -447,19 +363,7 @@ class TicketsTags(models.Model):
         unique_together = (('ticket', 'tag'),)
 
 
-class User(models.Model):
-    email = models.CharField(unique=True, max_length=191, blank=True, null=True)
-    proxy_id = models.CharField(unique=True, max_length=191, blank=True, null=True)
-    password = models.CharField(max_length=191, blank=True, null=True)
-    first_name = models.CharField(max_length=191)
-    last_name = models.CharField(max_length=191, blank=True, null=True)
-    is_enabled = models.IntegerField()
-    verification_code = models.CharField(unique=True, max_length=191, blank=True, null=True)
-    timezone = models.CharField(max_length=191, blank=True, null=True)
-    timeformat = models.CharField(max_length=191, blank=True, null=True)
 
-    class Meta:
-        db_table = 'users'
 
 
 class UserInstance(models.Model):

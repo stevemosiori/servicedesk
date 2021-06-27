@@ -16,11 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
-from sdapp.views import dashboard, profile, settings, tickets
+from sdapp.views import (
+    index,
+    dashboard, 
+    profile, 
+    settings, 
+    tickets, 
+    new_ticket,
+    upload_attachment,
+)
 
 urlpatterns = [
+    path('', index, name='index'),
     path('settings/', settings, name='settings'),
     path('tickets/', tickets, name='tickets'),
+    path('tickets/new/', new_ticket, name='tickets.new'),
+    path('tickets/attachments/upload', upload_attachment, name='tickets.attachment.upload'),
     path('dashboard/', dashboard, name='dashboard'),
     path('accounts/profile/', profile, name='profile'),
     path('accounts/', include('django.contrib.auth.urls')),

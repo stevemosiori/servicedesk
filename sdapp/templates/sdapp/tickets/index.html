@@ -2,8 +2,105 @@
 
 {% block title %}Tickets - Service Desk{% endblock title %}
 
-{% block page_title %}Tickets{% endblock page_title %}
+{% block page_title %}Tickets <span data-href="{% url 'tickets.new' %}" class="btn btn-sm btn-outline-primary btn-flat animatedLinkBtn"><i class="fa fa-user-plus"></i>&nbsp;Add new ticket</span>{% endblock page_title %}
 
 {% block content %}
-    <h1>Tickets Index</h1>
+<div class="row">
+    <div class="col-md-3">
+        <div id="pageSideMinibar" class="pageSideMinibar m-0 p-0">
+            <div class="card">
+                <div style="border: 1px solid lightgrey;border-bottom: 0;font-size: 80%;" class="row m-0 p-0">
+                    <div class="col-10 p-2">Current view info</div>
+                    <div style="width: 100%;border-left: 1px solid lightgrey;" class="col-2 btn-group p-0 m-0">
+                        <button style="width: 100%;" type="button" class="btn btn-light btn-xs m-0" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" id="miniSideBarLockBtn"><i class="fa fa-unlock-alt"></i> Unlock pane</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-side-content p-2">
+                    
+                    <p class="m-0">
+                        <span class="key">Open</span>
+                        <span class="value float-right"><span class="badge badge-pill badge-secondary">3</span></span>
+                    </p>
+                    <p class="m-0">
+                        <span class="key">New</span>
+                        <span class="value float-right"><span class="badge badge-pill badge-secondary">2</span></span>
+                    </p>
+                    <p class="m-0">
+                        <span class="key">Resolved</span>
+                        <span class="value float-right"><span class="badge badge-pill badge-secondary">22</span></span>
+                    </p>
+                    <p class="m-0">
+                        <span class="key">Spam</span>
+                        <span class="value float-right"><span class="badge badge-pill badge-secondary">4</span></span>
+                    </p>
+                    <p class="m-0">
+                        <span class="key">Closed</span>
+                        <span class="value float-right"><span class="badge badge-pill badge-secondary">45</span></span>
+                    </p>
+                </div>
+                <p style="border: 1px solid lightgrey;border-bottom: 0;font-size: 80%;" class="p-2 m-0">
+                    <span class="float-right"><i class="fa fa-filter"></i></span>Filter by
+                </p>
+                <div class="p-2 page-side-content">
+                    <div class="form-group mt-2">
+                        <label class="full-width px-1 text-capitalize">Status <span class="float-right"><i data-toggle="tooltip" title="Switch to view students from a specific class" class="fa fa-question-circle text-secondary"></i></span> </label>
+                        <select name="class_id" class="custom-select studentsFilterControl">
+                            <option value="ALL">ALL</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label class="full-width px-1 text-capitalize">Priority <span class="float-right"><i data-toggle="tooltip" title="Switch to view students from a specific stream" class="fa fa-question-circle text-secondary"></i></span> </label>
+                        <select name="stream_id" class="custom-select studentsFilterControl">
+                            <option value="ALL">ALL</option>
+                        </select>
+                    </div>
+            
+                    <div class="form-group mt-2">
+                        <label class="full-width px-1">Date <span class="float-right"><i data-toggle="tooltip" title="Switch to view a specific gender of students" class="fa fa-question-circle text-secondary"></i></span> </label>
+                        <select name="gender" class="custom-select studentsFilterControl">
+                            <option value="ALL">ALL</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div style="height: fit-content;" id="pageRightContentArea">
+            <table style="margin: 0!important;width: 100%;" id="ticketsTable" class="dt-responsive table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="ticketsTable_AllCheck">
+                                <label for="ticketsTable_AllCheck" class="custom-control-label m-0"></label>
+                            </div>
+                        </th>
+                        <th>#</th>
+                        <th>Customer</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Replies</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock content %}
+
+{% block js %}
+<script>
+var DTtableElem = '#ticketsTable';
+window.DTdefaultOptions.columnDefs.push({
+    "targets"   : [ 0 ],
+    "orderable" : false
+});
+window.ticketsDT = loadDatable({}, `{% url 'tickets' %}`, DTtableElem);
+</script>
+{% endblock js %}

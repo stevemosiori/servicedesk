@@ -4,7 +4,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
     <title>{% block title %}{% endblock title %}</title>
+
+    <link rel="stylesheet" href="{% static 'sdapp/libs/jquery-ui/jquery-ui.min.css' %}">
 
     <!-- Google Font: Source Sans Pro -->
     {% comment %} <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> {% endcomment %}
@@ -18,6 +38,24 @@
     <link rel="stylesheet" href="{% static 'sdapp/libs/adminlte/dist/css/adminlte.min.css' %}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{% static 'sdapp/libs/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    {% if 'summernote' in view_reqs %}
+    <link rel="stylesheet" href="{% static 'sdapp/libs/adminlte/plugins/summernote/summernote-bs4.min.css' %}">
+    {% endif %}
+    {% if 'dropzone' in view_reqs %}
+    <link rel="stylesheet" href="{% static 'sdapp/libs/dropzone/dist/min/dropzone.min.css' %}">
+    {% endif %}
+
+    {% if 'datatables' in view_reqs %}
+    <link rel="stylesheet" type="text/css" href="{% static 'sdapp/libs/DataTables/datatables/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sdapp/libs/DataTables/buttons/css/buttons.jqueryui.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sdapp/libs/DataTables/responsive/css/responsive.dataTables.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'sdapp/libs/DataTables/responsive/css/responsive.bootstrap4.min.css' %}"/>
+    {% endif %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'sdapp/libs/snackbar/dist/snackbar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'sdapp/libs/adminlte/plugins/toastr/toastr.min.css' %}">
+    <link rel="stylesheet" href="{% static 'sdapp/css/style.css' %}?v=4">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -125,10 +163,10 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                <img src="{% static 'sdapp/libs/adminlte/dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
+                <img src="{% static 'sdapp/images/sd.jpeg' %}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{ user.get_full_name }}</a>
                 </div>
             </div>
 
@@ -250,5 +288,373 @@
     <script src="{% static 'sdapp/libs/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
     <!-- AdminLTE App -->
     <script src="{% static 'sdapp/libs/adminlte/dist/js/adminlte.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/jquery-loading-overlay-2.1.7/dist/loadingoverlay.min.js' %}"></script>
+    {% if 'summernote' in view_reqs %}
+    <script src="{% static 'sdapp/libs/adminlte/plugins/summernote/summernote-bs4.min.js' %}"></script>
+    {% endif %}
+    {% if 'dropzone' in view_reqs %}
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+    {% endif %}
+    {% if 'jquery_form' in view_reqs %}
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/jq-form-4.3.0/dist/jquery.form.min.js' %}"></script>
+    {% endif %}
+    {% if 'pwstrength' in view_reqs %}
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/jq-form-4.3.0/dist/jquery.form.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/jquery.pwstrength/dist/pwstrength-bootstrap.min.js' %}"></script>
+    {% endif %}
+
+
+
+
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/snackbar/dist/snackbar.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/adminlte/plugins/toastr/toastr.min.js' %}"></script>
+
+
+    {% if 'datatables' in view_reqs %}
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/DataTables/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/DataTables/datatables/js/dataTables.bootstrap4.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/DataTables/responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/DataTables/responsive/js/responsive.bootstrap4.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/DataTables/buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/DataTables/buttons/js/buttons.jqueryui.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/adminlte/plugins/jszip/jszip.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/adminlte/plugins/pdfmake/pdfmake.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/adminlte/plugins/pdfmake/vfs_fonts.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/DataTables/buttons/js/buttons.html5.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/DataTables/buttons/js/buttons.print.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static 'sdapp/libs/DataTables/buttons/js/buttons.colVis.js' %}"></script>
+    <script>
+        window.DTdefaultOptions = {
+            dom: `<"dt-bts p-0" B>
+                    <"card full-width m-0 rounded-0"
+                        <"card-header"
+                            <"row" <"col-md-6" l><"col-md-6" f>>
+                        >
+                        <"card-body p-0"
+                            <"table-responsive-md m-0 p-0" t>
+                        >
+                        <"card-footer"
+                            <"row" <"col-12 d-flex justify-content-center" p><"col-12 text-center small" i>>
+                        >
+                    >`,
+
+            columnDefs: [],
+            pageLength: 20,
+            language: {
+                "processing": "<h4><i class='fa fa-spin fa-spinner'></></h4>",
+                "search": "",
+                "searchPlaceholder": "Search...",
+                "lengthMenu": '<select class="custom-select custom-select-sm form-control form-control-sm">'+
+                    '<option value="20">20 records</option>'+
+                    '<option value="35">35 records</option>'+
+                    '<option value="50">50 records</option>'+
+                    '<option value="100">100 records</option>'+
+                    '<option value="500">500 records</option>'+
+                    '<option value="1000">1000 records</option>'+
+                    '</select>'
+                ,
+                "paginate": {
+                    "next": "<i title='Next page' class='fa fa-angle-right'></i>",
+                    "previous": "<i title='Previous page' class='fa fa-angle-left'></i>",
+                    "first": "<i title='First page' class='fa fa-angle-double-left'></i>",
+                    "last": "<i title='Last page' class='fa fa-angle-double-right'></i>",
+                    "infoEmpty": "No entries to show"
+                }
+            },
+            
+            // searchDelay: 200,
+            /*
+                * * `numbers` - Page number buttons only
+                * * `simple` - 'Previous' and 'Next' buttons only
+                * * 'simple_numbers` - 'Previous' and 'Next' buttons, plus page numbers
+                * * `full` - 'First', 'Previous', 'Next' and 'Last' buttons
+                * * `full_numbers` - 'First', 'Previous', 'Next' and 'Last' buttons, plus page numbers
+                * * `first_last_numbers` - 'First' and 'Last' buttons, plus page numbers
+            */
+            pagingType: 'full_numbers',
+            // scrollX: true,
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: '<i class="far fa-copy"></i> Copy',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excel',
+                    text: '<i class="far fa-file-excel"></i> Excel',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    text: '<i class="fa fa-columns"></i> Columns',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+            ]
+        };
+
+        function loadDatable(data, url, element) {
+            $.extend(window.DTdefaultOptions, {
+                "processing": true,
+                "serverSide": true,
+                "order": [],
+                "ajax": {},
+            });
+
+            $.extend(window.DTdefaultOptions.ajax, {
+                url: url,
+                method: 'POST',
+                data: data,
+                error: function(xhr) {
+                    console.log(xhr);
+                }
+            });
+
+            DT = $(element).DataTable(window.DTdefaultOptions);
+
+            DT.on('draw.dt', function(e) {
+                appLoader('hide', element)
+            }).on('xhr.dt', function(e, settings, json) {
+                appLoader('show', element)
+            });
+
+            return DT;
+        }
+        
+    </script>
+    {% endif %}
+    <script>
+        $(function() {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-top-right",
+                "onclick": null,
+                "showDuration": "1000",
+                "hideDuration": "1000",
+                "timeOut": "12000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "progressBar": !0
+            };
+        });
+    </script>
+    <script>
+        $.LoadingOverlaySetup({
+            image: "{% static 'sdapp/images/loader2.png' %}",
+            imageAnimation: "rotate_right 1.5s"
+        });
+    </script>
+    <script>
+        function appHttpPost(options) {
+            let SuccessCallback = null;
+            let DefaultData = {};
+            let LoaderElement = null;
+
+            if (options.data != undefined) $.extend(DefaultData, options.data);
+            if (options.success != undefined) SuccessCallback = options.success;
+            if (options.loaderElement != undefined) LoaderElement = options.loaderElement;
+
+            var conf = {
+                url: options.url,
+                type: 'POST',
+                data: DefaultData,
+                contentType: 'application/x-www-form-urlencoded',
+                beforeSend: function(xhr) {
+                    if (LoaderElement !== null) appLoader('show', LoaderElement);
+                },
+                complete: function(xhr, status) {
+                    if (LoaderElement !== null) appLoader('hide', LoaderElement);
+                }
+            };
+
+            $.ajax(conf).done(function(response, status, xhr) {
+                if (SuccessCallback !== null) SuccessCallback(response, status, xhr);
+            }).fail(function(xhr, status, error) {
+                console.log(xhr);
+            });
+        }
+
+        function appLoadContent(options) {
+            let DefaultData = {};
+            let Method = "GET";
+            let ClearContentElement = true;
+            let SuccessCallback = null;
+            let ContentElement = options.contentElement;
+            let LoaderElement = ContentElement;
+
+            if (options.data) $.extend(DefaultData, data);
+            if (options.method) Method = options.method;
+            if (options.clearContentElement) ClearContentElement = options.clearContentElement;
+            if (options.success) SuccessCallback = options.success;
+
+            $.ajax({
+                url: options.url,
+                type: Method,
+                data: DefaultData,
+                contentType: 'application/x-www-form-urlencoded',
+                beforeSend: function(xhr) {
+                    if (LoaderElement !== null) {
+                        if ( ClearContentElement ) $(ContentElement).html('');
+                        appLoader('show', LoaderElement);
+                    }
+                },
+                complete: function(xhr, status) {
+                    if (LoaderElement !== null ) appLoader('hide', LoaderElement);
+                }
+            }).done(function(response, status, xhr) {
+                if (response.content) {
+                    $(ContentElement).html(response.content);
+                } else {
+                    console.log("Content has invalid format");
+                }
+
+                if (SuccessCallback !== null) SuccessCallback(response, status, xhr);
+            }).fail(function(xhr, status, error) {
+                console.log(xhr);
+            });
+        }
+
+        function appLoader(operation, element) {
+            if (operation == 'show') {
+                $(element).LoadingOverlay('show');
+            } else if (operation == 'hide') {
+                $(element).LoadingOverlay('hide', true);
+            }
+        }
+
+        function appDatepicker(elem, container, target = null) {
+            $(elem).datepicker({
+            autoclose: true,
+            format: "dd/mm/yyyy",
+            todayHighlight: true,
+            container: container,
+            todayBtn: 'linked'
+            });
+        }
+
+        function appSnackbar(
+            msg = '', 
+            pos = 'bottom-center',
+            actionText = 'Dismiss',
+            duration = 5e3, 
+            showAction = true, 
+            onActionClick = function() {
+                Snackbar.close();
+            }, 
+            onClose = () => {}
+        ) {
+            Snackbar.show({
+                text: msg,
+                pos: pos,
+                duration: duration,
+                showAction: showAction,
+                actionText: actionText,
+                onActionClick: onActionClick,
+                onClose: onClose
+            });
+        }
+
+        function appModal(operation, config = {}) {
+            let defaultConfig = {
+                modalHeader: '{$app_name}',
+                modalContent: '',
+                actions: [],
+                showLoadingOverLay: false,
+                onShow: null
+            };
+
+            $.extend(defaultConfig, config);
+
+            var appLoaderElement = "#appModalBody";
+
+            if (operation == 'show') {
+                var appModalWidget = $('#appModal').modal('show');
+                $('#appModalHeader').html(defaultConfig.modalHeader);
+                $('#appModalBody').html(defaultConfig.modalContent);
+
+                if (defaultConfig.showLoadingOverLay) {
+                    appLoader('show', appLoaderElement);
+                } 
+
+                let footerBtns = `<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>`;
+                for(let i = 0; i < defaultConfig.actions.length; i++) {
+                    let btn = defaultConfig.actions[i];
+                    let btnId = "footer-btn-" + (new Date().getTime() + (Math.floor(Math.random() * 1000) + 1));
+                    let btnHtml = `<button id="${ btnId }" class="btn btn-${ btn.type }">${ btn.text }</button>`;
+                    footerBtns += btnHtml;
+
+                    $( document ).on('click', "#" + btnId, btn.click);
+                }
+
+                $('#appModalFooter').html(footerBtns);
+
+                if (defaultConfig.onInit) {
+                    defaultConfig.onInit();
+                }
+
+                appModalWidget.on('hide.bs.modal', function (event) {
+                    appLoader('hide', appLoaderElement)
+                });
+            } else if (operation == 'hide') {
+                $('#appModal').modal('hide');
+                $('#appModalBody').html('');
+                appLoader('hide', '#appModalBody');
+            } else if (operation == 'hide_loader') {
+                appLoader('hide', '#appModalBody');
+            } else if (operation == 'show_loader') {
+                appLoader('show', '#appModalBody');
+            } else if (operation == 'set_content') {
+                $('#appModalBody').html(defaultConfig.modalContent);
+                appLoader('hide', '#appModalBody');
+            }
+        }
+
+        $(function() {
+            $( document ).on('click', '#ps-show-pw', function( e ) {
+                if (e.preventDefault) e.preventDefault();
+
+                let pwInput = $( this ).parent().parent().find( 'input' );
+                let inputType = pwInput.attr( 'type' );
+
+                if ( inputType === 'password' ) {
+                    pwInput.attr('type', 'text');
+                    $( this ).html(`
+                        <span class="fas fa-eye-slash"></span>
+                    `);
+                } else if ( inputType === 'text' ) {
+                    pwInput.attr('type', 'password');
+                    $( this ).html(`
+                        <span class="fas fa-eye"></span>
+                    `);
+                }
+
+                pwInput.focus();
+            });
+
+            $( '[data-toggle="tooltip"]' ).tooltip();
+            
+            $( document ).on('click', '.animatedLinkBtn', function(e) {
+                if (e.preventDefault) e.preventDefault();
+
+                $('body').LoadingOverlay('show', {
+                    image: "{% static 'sdapp/images/loader.png' %}"
+                });
+
+                setTimeout(function() {
+                    window.location.href = $(this).data('href');
+                }.bind(this), 100);
+            });
+        });
+    </script>
+    {% block js %}{% endblock js %}
 </body>
 </html>
